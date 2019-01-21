@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Test
+if [ $# -lt 2 ]; then
+   echo "Usage: $0 <amount> <purpose>"
+   echo "(example: $0 300 Yesterdays lunch)"
+   exit 0
+fi
+
+# Config
+API="https://api.paylibo.com/paylibo/generator/czech/image"
+ACC=<YOUR_ACCOUNT_NUMBER_HERE>
+BC=<YOUR_BANK_CODE_HERE>
+CUR="CZK"
+VS=666
+
+AMNT="$1"
+shift
+MSG="`echo "$*"|tr " " "+"`"
+
+echo "$AMNT,- $ACC/$BC (vs: $VS, zpráva: $*)"
+echo "$API?accountNumber=$ACC&bankCode=$BC&amount=$AMNT&currency=$CUR&vs=$VS&message=$MSG"
